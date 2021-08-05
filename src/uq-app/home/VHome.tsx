@@ -1,37 +1,74 @@
-import { FA, VPage } from "tonva-react";
+import { FA, LMR, Page, VPage } from "tonva-react";
 import { CHome } from "./CHome";
 import logo from '../../logo.svg';
 import '../../App.css';
+import { sendBusAdapterExParams, sendBusFiReceivableExParams, sendBusOrderChangedExParams } from "./data";
+
+interface Item {
+	caption: string;
+	json: any;
+	action: () => Promise<void>;
+}
 
 export class VHome extends VPage<CHome> {
-	private items:string[] = [
-		'在服务器端创建 app',
-		'创建 uq 编程单元',
-		'uq 关联 app',
-		'uq 绑定数据库服务',
-		'编写 uq 代码',
-		'提交 uq 编译生成数据库',
-		'在 src/appConfig.ts 设置 uqs',
-		'在 vs code 调试环境运行Build UqApp，生成uq typescript interface',
-		'调用 uq 接口，读写数据',
-	];
 	header() {return '首页'}
 	content() {
-		return <div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-				<span className="text-success">tonva</span> + <span className="text-primary">uq</span> = UI + DB
-				</p>
-				<div className="mb-3 h6 text-warning">
-					编程
-					<FA name="handshake-o" size="lg" className="text-danger mx-2" />
-					开心
-				</div>
-			</header>
-			<ul className="text-left my-3 mr-3">
-			{this.items.map((v, index) => <li key={index} className="my-2">{v}</li>)}
-			</ul>
+		let items:Item[] = [
+			{
+				caption: '发送Bus OrderChanged.orderChanged',
+				json: sendBusOrderChangedExParams,
+				action: this.controller.sendBusOrderChangedEx,
+			},
+			{
+				caption: '发送Bus FiReceivable.innerOrderPaid',
+				json: sendBusFiReceivableExParams,
+				action: this.controller.sendBusFiReceivableEx,
+			},
+			{
+				caption: '发送Bus Adapter.deliveryConfirm',
+				json: sendBusAdapterExParams,
+				action: this.controller.sendBusAdapterEx,
+			},
+		];
+		return <div className="my-3">
+			{items.map(v => this.renderItem(v))}
 		</div>;
+	}
+
+	private renderItem(item:Item):JSX.Element {
+		let {caption, json, action} = item;
+		let right = <FA name="angle-right" />;
+		return <LMR className="cursor-pointer p-3 mb-1 bg-white" 
+			right={right} onClick={() => this.clickItem(item)}>
+			{caption}
+		</LMR>;
+	}
+
+	private clickItem(item:Item) {
+		let {caption} = item;
+		this.openPageElement(<Page header={caption}>
+			<div className="p-3">
+				<pre className="mb-3">{JSON.stringify(item.json, null, 4)}</pre>
+				<button className="btn btn-primary" onClick={() => this.submit(item)}>发送</button>
+			</div>
+		</Page>);
+	}
+
+	private async submit(item:Item) {
+		this.closePage();
+		this.openPageElement(<Page header="发送中...">
+			<div className="p-3">
+				<i className="fa fa-spinner fa-spin fa-1x fa-fw" />
+			</div>
+		</Page>);
+		let {action, caption, json} = item;
+		await action();
+		this.closePage();
+		this.openPageElement(<Page header="发送完成" back="close">
+			<div className="py-3">
+				<div className="px-3 text-success">完成{caption}</div>
+				<pre className="bg-white my-3 p-3">{JSON.stringify(item.json, null, 4)}</pre>
+			</div>
+		</Page>);
 	}
 }
