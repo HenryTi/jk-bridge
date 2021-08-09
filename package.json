@@ -23,7 +23,7 @@
     "react-chartjs-2": "^2.11.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
-    "tonva-react": "^2.0.31",
+    "tonva-react": "^2.0.33",
     "tonva-uqui": "^0.1.22",
     "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"

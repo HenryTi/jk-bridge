@@ -11,6 +11,6 @@ export * as BzHelloTonva from './BzHelloTonva';
 export * as JkBridge from './JkBridge';
 
 export function setUI(uqs:UQs) {
-	BzHelloTonva.setUI(uqs.BzHelloTonva);
+	// BzHelloTonva.setUI(uqs.BzHelloTonva);
 	JkBridge.setUI(uqs.JkBridge);
 }

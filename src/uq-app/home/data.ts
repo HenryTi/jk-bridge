@@ -1,9 +1,10 @@
 import { ParamSendBusAdapterEx, ParamSendBusFiReceivableEx, ParamSendBusOrderChangedEx } from "uq-app/uqs/JkBridge";
 
-const orderId = 'jk-old-2';
+const orderId1 = 'jk-old-2';
+const orderId2 = 'jk-old-2';
 export const sendBusOrderChangedExParams:ParamSendBusOrderChangedEx[] = [
     {
-        orderId,
+        orderId: orderId2,
         orderItemId: 'jk-old-item-3',
         seller: 'a', // string;
         salesman: 100, // number;
@@ -30,7 +31,7 @@ export const sendBusOrderChangedExParams:ParamSendBusOrderChangedEx[] = [
         createDate: Date.now() / 1000, // number;
     },
     {
-        orderId,
+        orderId: orderId2,
         orderItemId: 'jk-old-item-4',
         seller: 'a', // string;
         salesman: 100, // number;
@@ -59,9 +60,32 @@ export const sendBusOrderChangedExParams:ParamSendBusOrderChangedEx[] = [
 ];
 
 export const sendBusFiReceivableExParams:ParamSendBusFiReceivableEx[] = [
-
+    {
+        orderItemId: 'jk-old-item-4',
+        orderId: orderId2,
+        amount: 100,
+        currency: 1,
+        action: null,
+        createDate: Date.now() / 1000, // number;
+    }
 ];
 
 export const sendBusAdapterExParams:ParamSendBusAdapterEx[] = [
-
+	{
+        outBoundItemId: undefined,
+	    outBoundId: undefined,
+	    warehouseName: undefined,
+	    logisticsCompanyId: undefined,
+	    logisticsNumber: undefined,
+	    deliveryGoodsTime: undefined,
+	    deliveryAddress: undefined,
+	    saleOrderId: orderId1,
+	    saleOrderItemId: 'jk-old-item-1',
+	    packageId: undefined,
+	    quantity: 3,
+	    operatorId: undefined,
+        operatorName: undefined,
+        operatorPhone: undefined,
+        customerId: undefined,
+    }
 ];
