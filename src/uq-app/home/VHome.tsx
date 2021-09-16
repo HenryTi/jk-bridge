@@ -2,7 +2,7 @@ import { FA, LMR, Page, VPage } from "tonva-react";
 import { CHome } from "./CHome";
 import logo from '../../logo.svg';
 import '../../App.css';
-import { sendBusAdapterExParams, sendBusFiReceivableExParams, sendBusOrderChangedExParams } from "./data";
+import { saveOrderParams, sendBusAdapterExParams, sendBusFiReceivableExParams, sendBusJkOrderBusParams, sendBusOrderChangedExParams } from "./data";
 
 interface Item {
 	caption: string;
@@ -28,6 +28,16 @@ export class VHome extends VPage<CHome> {
 				caption: '发送Bus Adapter.deliveryConfirm',
 				json: sendBusAdapterExParams,
 				action: this.controller.sendBusAdapterEx,
+			},
+			{
+				caption: '新建模拟订单',
+				json: saveOrderParams,
+				action: this.controller.createNewOrder,
+			},
+			{
+				caption: '发送Bus JkOrderBus.dleiver-done',
+				json: sendBusJkOrderBusParams,
+				action: this.controller.deliverDone,
 			},
 		];
 		return <div className="my-3">

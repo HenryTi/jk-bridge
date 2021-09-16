@@ -1,4 +1,6 @@
 import { ParamSendBusAdapterEx, ParamSendBusFiReceivableEx, ParamSendBusOrderChangedEx } from "uq-app/uqs/JkBridge";
+import { ParamDoneDeliver } from "uq-app/uqs/JkDeliver";
+import { ParamSaveOrder } from "uq-app/uqs/JkOrder";
 
 const orderId1 = 'jk-old-2';
 const orderId2 = 'jk-old-2';
@@ -89,3 +91,71 @@ export const sendBusAdapterExParams:ParamSendBusAdapterEx[] = [
         customerId: undefined,
     }
 ];
+
+export const sendBusJkOrderBusParams: ParamDoneDeliver = {
+	customer: 1,
+	contact: 2,
+	warehouse: 1,
+	detail: [
+        {
+            orderDetail: 31198796,
+            quantity: 17,
+	    },
+        {
+            orderDetail: 31198797,
+            quantity: 9,
+	    },
+        {
+            orderDetail: 31198798,
+            quantity: 11,
+	    },
+    ],
+};
+
+export const saveOrderParams:ParamSaveOrder = {
+	id: undefined,
+	no: undefined, 
+	webUser: undefined,
+	customer: 65695,
+	buyerAccount: undefined,
+	shippingContact: undefined,
+	invoiceContact: undefined,
+	invoiceType: undefined,
+	invoiceInfo: undefined,
+	sumAmount: undefined,
+	currency: undefined,
+	couponNo: undefined,
+	sheetId: undefined,
+	detail: [
+        {
+            id: undefined,
+            main: undefined,
+            warehouse: 14,
+            item: 29514,
+            product: 12686,
+            quantity: 17,
+            price: 1.70,
+            amount: 1.7*17,
+	    },
+        {
+            id: undefined,
+            main: undefined,
+            warehouse: 14,
+            item: 2422,
+            product: 1003,
+            quantity: 18,
+            price: 1.88,
+            amount: 1.88*18,
+	    },
+        {
+            id: undefined,
+            main: undefined,
+            warehouse: 14,
+            item: 2423,
+            product: 1003,
+            quantity: 19,
+            price: 1.99,
+            amount: 1.99*19,
+	    },
+    ],
+}

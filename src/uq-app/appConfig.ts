@@ -28,6 +28,18 @@ export const appConfig: AppConfig = {
 			name: 'bridge',
 			alias: 'Bridge',
 			version: '0.1.0',
+		},
+		{
+			dev: jk,
+			name: 'deliver',
+			alias: 'Deliver',
+			version: '0.1.0',
+		},
+		{
+			dev: jk,
+			name: 'order',
+			alias: 'Order',
+			version: '0.1.0',
 		}
 	],
 	noUnit: true,
