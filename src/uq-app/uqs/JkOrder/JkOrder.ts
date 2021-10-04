@@ -1,4 +1,4 @@
-//=== UqApp builder created on Thu Sep 16 2021 00:08:47 GMT-0400 (北美东部夏令时间) ===//
+//=== UqApp builder created on Mon Oct 04 2021 00:03:28 GMT-0400 (北美东部夏令时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IDXValue, Uq, UqTuid, UqAction, UqSheet, UqBook, UqQuery, UqMap, UqHistory, UqPending, UqID, UqIDX, UqIX } from "tonva-react";
 
@@ -6,6 +6,13 @@ import { IDXValue, Uq, UqTuid, UqAction, UqSheet, UqBook, UqQuery, UqMap, UqHist
 //===============================
 //======= UQ 百灵威系统工程部/order ========
 //===============================
+
+export enum EnumFeeType {
+	packing = 11,
+	refrigeration = 12,
+	freezing = 13,
+	proxyFreight = 14
+}
 
 export enum EnumAmountDiff {
 	packing = 11,
@@ -273,6 +280,7 @@ export interface ParamSaveOrder {
 	currency: number;
 	couponNo: string;
 	sheetId: number;
+	createDate: any;
 	detail: {
 		id: number;
 		main: number;
@@ -282,6 +290,8 @@ export interface ParamSaveOrder {
 		quantity: number;
 		price: number;
 		amount: number;
+		lotNumber: string;
+		createDate: any;
 	}[];
 
 }
@@ -360,6 +370,8 @@ export interface ReturnGetCustomerReturnable$page {
 	quantity: number;
 	price: number;
 	amount: number;
+	lotNumber: string;
+	createDate: any;
 	deliver: number;
 	deliverDone: number;
 	deliverTime: any;
@@ -369,7 +381,8 @@ export interface ReturnGetCustomerReturnable$page {
 	invoice: number;
 	invoiceDone: number;
 	invoiceTime: any;
-	deliverReturn: number;
+	invoiceReturn: number;
+	invoiceReturnDone: number;
 }
 export interface ResultGetCustomerReturnable {
 	$page: ReturnGetCustomerReturnable$page[];
@@ -393,6 +406,7 @@ export interface ReturnGetCustomerOrderReturnMain {
 	currency: number;
 	couponNo: string;
 	sheetId: number;
+	createDate: any;
 }
 export interface ReturnGetCustomerOrderReturnDetail {
 	id: number;
@@ -403,6 +417,8 @@ export interface ReturnGetCustomerOrderReturnDetail {
 	quantity: number;
 	price: number;
 	amount: number;
+	lotNumber: string;
+	createDate: any;
 	deliver: number;
 	deliverDone: number;
 	deliverTime: any;
@@ -412,11 +428,28 @@ export interface ReturnGetCustomerOrderReturnDetail {
 	invoice: number;
 	invoiceDone: number;
 	invoiceTime: any;
-	deliverReturn: number;
+	invoiceReturn: number;
+	invoiceReturnDone: number;
 }
 export interface ResultGetCustomerOrderReturn {
 	main: ReturnGetCustomerOrderReturnMain[];
 	detail: ReturnGetCustomerOrderReturnDetail[];
+}
+
+export interface ParamSearchOrders {
+	keyWord: string;
+	state: string;
+	customer: number;
+}
+export interface ReturnSearchOrders$page {
+	seq: number;
+	id: number;
+	no: string;
+	date: any;
+	state: string;
+}
+export interface ResultSearchOrders {
+	$page: ReturnSearchOrders$page[];
 }
 
 export interface ParamCart {
@@ -506,6 +539,8 @@ export interface OrderDetail {
 	quantity: number;
 	price: number;
 	amount: number;
+	lotNumber: string;
+	createDate: any;
 }
 
 export interface OrderMain {
@@ -522,37 +557,51 @@ export interface OrderMain {
 	currency: number;
 	couponNo: string;
 	sheetId: number;
+	createDate: any;
 }
 
 export interface ReturnDetail {
 	id?: number;
 	main?: number;
 	orderDetail: number;
+	item: number;
+	product: number;
 	quantity: number;
+	price: number;
 	amount: number;
+	lotNumber: string;
+	createDate: any;
 }
 
 export interface ReturnMain {
 	id?: number;
+	no?: string;
+	customerAccount: number;
+	webUser: number;
+	shippingContact: number;
+	invoiceContact: number;
+	sumAmount: number;
+	currency: number;
+	createDate: any;
 }
 
 export interface OrderMainEx {
 	id?: number;
-	orderId: string;
 	seller: string;
 	salesman: number;
 	salesRegion: number;
-	customer: number;
-	buyerAccount: number;
 	organization: number;
 	currency: number;
-	promotionId: string;
+	poNumber: string;
+	carrier: number;
+	commentsAboutDeliver: string;
 	createDate: any;
 }
 
 export interface OrderDetailEx {
 	id?: number;
 	orderItemId: string;
+	endUser: number;
 	brand: number;
 	retail: number;
 	retailCurrency: number;
@@ -560,10 +609,26 @@ export interface OrderDetailEx {
 	bottomPriceCurrency: number;
 	costPrice: number;
 	costPriceCurrency: number;
+	poItemNumber: string;
 	mark: string;
 	tradeType: string;
 	taxRate: number;
+	promotionId: string;
 	createDate: any;
+}
+
+export interface ReturnDetailEx {
+	id?: number;
+	returnItemId: string;
+	endUser: number;
+	mark: string;
+}
+
+export interface ReturnMainEx {
+	id?: number;
+	seller: string;
+	salesman: number;
+	salesRegion: number;
 }
 
 export interface DxOrderDetail {
@@ -577,7 +642,8 @@ export interface DxOrderDetail {
 	invoice?: number;
 	invoiceDone?: number;
 	invoiceTime?: any;
-	deliverReturn?: number;
+	invoiceReturn?: number;
+	invoiceReturnDone?: number;
 	$act?: number;
 }
 
@@ -610,7 +676,8 @@ export interface ActParamDxOrderDetail {
 	invoice?: number|IDXValue;
 	invoiceDone?: number|IDXValue;
 	invoiceTime?: any|IDXValue;
-	deliverReturn?: number|IDXValue;
+	invoiceReturn?: number|IDXValue;
+	invoiceReturnDone?: number|IDXValue;
 	$act?: number;
 }
 
@@ -638,6 +705,18 @@ export interface IxCustomerReturnable {
 	xi: number;
 }
 
+export interface IxOrderDetailFee {
+	ix: number;
+	xi: number;
+	fee: number;
+}
+
+export interface IxOrderMainFee {
+	ix: number;
+	xi: number;
+	fee: number;
+}
+
 export interface IxOrderDetailCoupon {
 	ix: number;
 	xi: number;
@@ -662,10 +741,14 @@ export interface ParamActs {
 	returnMain?: ReturnMain[];
 	orderMainEx?: OrderMainEx[];
 	orderDetailEx?: OrderDetailEx[];
+	returnDetailEx?: ReturnDetailEx[];
+	returnMainEx?: ReturnMainEx[];
 	dxOrderDetail?: ActParamDxOrderDetail[];
 	dxReturnDetail?: ActParamDxReturnDetail[];
 	dxOrderMainState?: ActParamDxOrderMainState[];
 	ixCustomerReturnable?: IxCustomerReturnable[];
+	ixOrderDetailFee?: IxOrderDetailFee[];
+	ixOrderMainFee?: IxOrderMainFee[];
 	ixOrderDetailCoupon?: IxOrderDetailCoupon[];
 	ixOrderAmountDiff?: IxOrderAmountDiff[];
 	ixOrderMainCustomerCoupon?: IxOrderMainCustomerCoupon[];
@@ -714,6 +797,7 @@ export interface UqExt extends Uq {
 	$poked: UqQuery<Param$poked, Result$poked>;
 	GetCustomerReturnable: UqQuery<ParamGetCustomerReturnable, ResultGetCustomerReturnable>;
 	GetCustomerOrderReturn: UqQuery<ParamGetCustomerOrderReturn, ResultGetCustomerOrderReturn>;
+	SearchOrders: UqQuery<ParamSearchOrders, ResultSearchOrders>;
 	SalesRegionWarehouse: UqMap;
 	OrderBuyerAccount: UqMap;
 	OrderTransportation: UqMap;
@@ -725,11 +809,19 @@ export interface UqExt extends Uq {
 	ReturnMain: UqID<any>;
 	OrderMainEx: UqID<any>;
 	OrderDetailEx: UqID<any>;
+	ReturnDetailEx: UqID<any>;
+	ReturnMainEx: UqID<any>;
 	DxOrderDetail: UqIDX<any>;
 	DxReturnDetail: UqIDX<any>;
 	DxOrderMainState: UqIDX<any>;
 	IxCustomerReturnable: UqIX<any>;
+	IxOrderDetailFee: UqIX<any>;
+	IxOrderMainFee: UqIX<any>;
 	IxOrderDetailCoupon: UqIX<any>;
 	IxOrderAmountDiff: UqIX<any>;
 	IxOrderMainCustomerCoupon: UqIX<any>;
+}
+
+export function assign(uq: any, to:string, from:any): void {
+	Object.assign((uq as any)[to], from);
 }

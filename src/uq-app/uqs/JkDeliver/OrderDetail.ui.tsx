@@ -50,17 +50,18 @@ const fields = {
 		"widget": "number",
 		"label": "Price"
 	} as FieldItemNum,
-	warehouse: {
-		"name": "warehouse",
-		"type": "id",
+	lotNumber: {
+		"name": "lotNumber",
+		"type": "string",
 		"isKey": false,
-		"label": "Warehouse"
-	} as FieldItemId,
+		"widget": "string",
+		"label": "LotNumber"
+	} as FieldItemString,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.main, fields.item, fields.product, fields.quantity, fields.amount, fields.price, fields.warehouse, 
+	fields.main, fields.item, fields.product, fields.quantity, fields.amount, fields.price, fields.lotNumber, 
 ];
 
 export const ui: UI = {

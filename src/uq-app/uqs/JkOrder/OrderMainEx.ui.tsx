@@ -11,13 +11,6 @@ const fields = {
 		"isKey": false,
 		"label": "Id"
 	} as FieldItemId,
-	orderId: {
-		"name": "orderId",
-		"type": "string",
-		"isKey": true,
-		"widget": "string",
-		"label": "OrderId"
-	} as FieldItemString,
 	seller: {
 		"name": "seller",
 		"type": "string",
@@ -37,18 +30,6 @@ const fields = {
 		"isKey": false,
 		"label": "SalesRegion"
 	} as FieldItemId,
-	customer: {
-		"name": "customer",
-		"type": "id",
-		"isKey": false,
-		"label": "Customer"
-	} as FieldItemId,
-	buyerAccount: {
-		"name": "buyerAccount",
-		"type": "id",
-		"isKey": false,
-		"label": "BuyerAccount"
-	} as FieldItemId,
 	organization: {
 		"name": "organization",
 		"type": "id",
@@ -61,12 +42,25 @@ const fields = {
 		"isKey": false,
 		"label": "Currency"
 	} as FieldItemId,
-	promotionId: {
-		"name": "promotionId",
+	poNumber: {
+		"name": "poNumber",
 		"type": "string",
 		"isKey": false,
 		"widget": "string",
-		"label": "PromotionId"
+		"label": "PoNumber"
+	} as FieldItemString,
+	carrier: {
+		"name": "carrier",
+		"type": "id",
+		"isKey": false,
+		"label": "Carrier"
+	} as FieldItemId,
+	commentsAboutDeliver: {
+		"name": "commentsAboutDeliver",
+		"type": "string",
+		"isKey": false,
+		"widget": "string",
+		"label": "CommentsAboutDeliver"
 	} as FieldItemString,
 	createDate: {
 		"name": "createDate",
@@ -77,7 +71,7 @@ const fields = {
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.orderId, fields.seller, fields.salesman, fields.salesRegion, fields.customer, fields.buyerAccount, fields.organization, fields.currency, fields.promotionId, fields.createDate, 
+	fields.seller, fields.salesman, fields.salesRegion, fields.organization, fields.currency, fields.poNumber, fields.carrier, fields.commentsAboutDeliver, fields.createDate, 
 ];
 
 export const ui: UI = {

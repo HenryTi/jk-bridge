@@ -1,6 +1,6 @@
-//=== UqApp builder created on Thu Sep 16 2021 00:08:47 GMT-0400 (北美东部夏令时间) ===//
+//=== UqApp builder created on Mon Oct 04 2021 00:03:28 GMT-0400 (北美东部夏令时间) ===//
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { IDXValue, Uq, UqTuid, UqAction, UqQuery, UqID } from "tonva-react";
+import { IDXValue, Uq, UqTuid, UqAction, UqQuery } from "tonva-react";
 
 
 //===============================
@@ -101,24 +101,7 @@ export interface Result$poked {
 	ret: Return$pokedRet[];
 }
 
-export interface $Piecewise {
-	id?: number;
-	name: string;
-	ratio: number;
-	offset: number;
-	asc: number;
-}
-
-export interface $PiecewiseDetail {
-	id?: number;
-	main?: number;
-	sec: number;
-	value: number;
-}
-
 export interface ParamActs {
-	$Piecewise?: $Piecewise[];
-	$PiecewiseDetail?: $PiecewiseDetail[];
 }
 
 
@@ -131,6 +114,8 @@ export interface UqExt extends Uq {
 	SendBusAdapterEx: UqAction<ParamSendBusAdapterEx, ResultSendBusAdapterEx>;
 	SendBusOrderChangedEx: UqAction<ParamSendBusOrderChangedEx, ResultSendBusOrderChangedEx>;
 	$poked: UqQuery<Param$poked, Result$poked>;
-	$Piecewise: UqID<any>;
-	$PiecewiseDetail: UqID<any>;
+}
+
+export function assign(uq: any, to:string, from:any): void {
+	Object.assign((uq as any)[to], from);
 }

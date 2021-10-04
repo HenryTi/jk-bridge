@@ -1,7 +1,7 @@
 import { Res, setRes, TFunc, UI, uqStringify } from "tonva-react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FieldItem, FieldItemInt, FieldItemNum, FieldItemString, FieldItemId } from "tonva-react";
-import { IxWarehouseDeliverMain } from "./JkDeliver";
+import { IxOrderActionBoundPostDone } from "./JkMe";
 
 /*--fields--*/
 const fields = {
@@ -17,15 +17,20 @@ const fields = {
 		"isKey": false,
 		"label": "Xi"
 	} as FieldItemId,
+	done: {
+		"name": "done",
+		"isKey": false,
+		"label": "Done"
+	} as undefined,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.xi, 
+	fields.xi, fields.done, 
 ];
 
 export const ui: UI = {
-	label: "IxWarehouseDeliverMain",
+	label: "IxOrderActionBoundPostDone",
 	fieldArr,
 	fields,
 };
@@ -43,6 +48,6 @@ export const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {
 	return res[str as string] ?? str;
 }
 
-export function render(item: IxWarehouseDeliverMain):JSX.Element {
+export function render(item: IxOrderActionBoundPostDone):JSX.Element {
 	return <>{uqStringify(item)}</>;
 };

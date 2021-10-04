@@ -1,6 +1,7 @@
 import { ParamSendBusAdapterEx, ParamSendBusFiReceivableEx, ParamSendBusOrderChangedEx } from "uq-app/uqs/JkBridge";
 import { ParamDoneDeliver } from "uq-app/uqs/JkDeliver";
 import { ParamSaveOrder } from "uq-app/uqs/JkOrder";
+import { ParamDoneReceive } from "uq-app/uqs/JkReceivePayment";
 
 const orderId1 = 'jk-old-2';
 const orderId2 = 'jk-old-2';
@@ -112,6 +113,24 @@ export const sendBusJkOrderBusParams: ParamDoneDeliver = {
     ],
 };
 
+export const sendBusJkReceivePaymentDoneReceive: ParamDoneReceive = {
+	customer: 1,
+	detail: [
+        {
+            orderDetail: 31198796,
+            amount: 17,
+	    },
+        {
+            orderDetail: 31198797,
+            amount: 9,
+	    },
+        {
+            orderDetail: 31198798,
+            amount: 11,
+	    },
+    ],
+};
+
 export const saveOrderParams:ParamSaveOrder = {
 	id: undefined,
 	no: undefined, 
@@ -126,6 +145,7 @@ export const saveOrderParams:ParamSaveOrder = {
 	currency: undefined,
 	couponNo: undefined,
 	sheetId: undefined,
+    createDate: undefined,
 	detail: [
         {
             id: undefined,
@@ -136,6 +156,8 @@ export const saveOrderParams:ParamSaveOrder = {
             quantity: 17,
             price: 1.70,
             amount: 1.7*17,
+            lotNumber: undefined,
+            createDate: new Date(),
 	    },
         {
             id: undefined,
@@ -146,6 +168,8 @@ export const saveOrderParams:ParamSaveOrder = {
             quantity: 18,
             price: 1.88,
             amount: 1.88*18,
+            lotNumber: undefined,
+            createDate: new Date(),
 	    },
         {
             id: undefined,
@@ -156,6 +180,8 @@ export const saveOrderParams:ParamSaveOrder = {
             quantity: 19,
             price: 1.99,
             amount: 1.99*19,
+            lotNumber: undefined,
+            createDate: new Date(),
 	    },
     ],
 }

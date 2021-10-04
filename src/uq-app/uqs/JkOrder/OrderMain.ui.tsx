@@ -86,11 +86,16 @@ const fields = {
 		"isKey": false,
 		"label": "SheetId"
 	} as FieldItemId,
+	createDate: {
+		"name": "createDate",
+		"isKey": false,
+		"label": "CreateDate"
+	} as undefined,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.no, fields.webUser, fields.customer, fields.buyerAccount, fields.shippingContact, fields.invoiceContact, fields.invoiceType, fields.invoiceInfo, fields.sumAmount, fields.currency, fields.couponNo, fields.sheetId, 
+	fields.no, fields.webUser, fields.customer, fields.buyerAccount, fields.shippingContact, fields.invoiceContact, fields.invoiceType, fields.invoiceInfo, fields.sumAmount, fields.currency, fields.couponNo, fields.sheetId, fields.createDate, 
 ];
 
 export const ui: UI = {

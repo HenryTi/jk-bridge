@@ -68,18 +68,25 @@ const fields = {
 		"isKey": false,
 		"label": "InvoiceTime"
 	} as undefined,
-	deliverReturn: {
-		"name": "deliverReturn",
+	invoiceReturn: {
+		"name": "invoiceReturn",
 		"type": "number",
 		"isKey": false,
 		"widget": "number",
-		"label": "DeliverReturn"
+		"label": "InvoiceReturn"
+	} as FieldItemNum,
+	invoiceReturnDone: {
+		"name": "invoiceReturnDone",
+		"type": "number",
+		"isKey": false,
+		"widget": "number",
+		"label": "InvoiceReturnDone"
 	} as FieldItemNum,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.deliver, fields.deliverDone, fields.deliverTime, fields.receive, fields.receiveDone, fields.receiveTime, fields.invoice, fields.invoiceDone, fields.invoiceTime, fields.deliverReturn, 
+	fields.deliver, fields.deliverDone, fields.deliverTime, fields.receive, fields.receiveDone, fields.receiveTime, fields.invoice, fields.invoiceDone, fields.invoiceTime, fields.invoiceReturn, fields.invoiceReturnDone, 
 ];
 
 export const ui: UI = {

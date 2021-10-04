@@ -37,10 +37,22 @@ export const appConfig: AppConfig = {
 		},
 		{
 			dev: jk,
+			name: 'collectpayment',
+			alias: 'ReceivePayment',
+			version: '0.1.0',
+		},
+		{
+			dev: jk,
 			name: 'order',
 			alias: 'Order',
 			version: '0.1.0',
-		}
+		},
+		{
+			dev: jk,
+			name: 'me',
+			alias: 'Me',
+			version: '0.1.0',
+		},
 	],
 	noUnit: true,
     tvs: {},

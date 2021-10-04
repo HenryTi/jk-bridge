@@ -18,6 +18,12 @@ const fields = {
 		"widget": "string",
 		"label": "OrderItemId"
 	} as FieldItemString,
+	endUser: {
+		"name": "endUser",
+		"type": "id",
+		"isKey": false,
+		"label": "EndUser"
+	} as FieldItemId,
 	brand: {
 		"name": "brand",
 		"type": "id",
@@ -63,6 +69,13 @@ const fields = {
 		"isKey": false,
 		"label": "CostPriceCurrency"
 	} as FieldItemId,
+	poItemNumber: {
+		"name": "poItemNumber",
+		"type": "string",
+		"isKey": false,
+		"widget": "string",
+		"label": "PoItemNumber"
+	} as FieldItemString,
 	mark: {
 		"name": "mark",
 		"type": "string",
@@ -84,6 +97,13 @@ const fields = {
 		"widget": "number",
 		"label": "TaxRate"
 	} as FieldItemNum,
+	promotionId: {
+		"name": "promotionId",
+		"type": "string",
+		"isKey": false,
+		"widget": "string",
+		"label": "PromotionId"
+	} as FieldItemString,
 	createDate: {
 		"name": "createDate",
 		"isKey": false,
@@ -93,7 +113,7 @@ const fields = {
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.orderItemId, fields.brand, fields.retail, fields.retailCurrency, fields.bottomPrice, fields.bottomPriceCurrency, fields.costPrice, fields.costPriceCurrency, fields.mark, fields.tradeType, fields.taxRate, fields.createDate, 
+	fields.orderItemId, fields.endUser, fields.brand, fields.retail, fields.retailCurrency, fields.bottomPrice, fields.bottomPriceCurrency, fields.costPrice, fields.costPriceCurrency, fields.poItemNumber, fields.mark, fields.tradeType, fields.taxRate, fields.promotionId, fields.createDate, 
 ];
 
 export const ui: UI = {

@@ -18,11 +18,11 @@ const fields = {
 		"widget": "string",
 		"label": "No"
 	} as FieldItemString,
-	customer: {
-		"name": "customer",
+	customerAccount: {
+		"name": "customerAccount",
 		"type": "id",
 		"isKey": false,
-		"label": "Customer"
+		"label": "CustomerAccount"
 	} as FieldItemId,
 	contact: {
 		"name": "contact",
@@ -30,11 +30,17 @@ const fields = {
 		"isKey": false,
 		"label": "Contact"
 	} as FieldItemId,
+	currency: {
+		"name": "currency",
+		"type": "id",
+		"isKey": false,
+		"label": "Currency"
+	} as FieldItemId,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.no, fields.customer, fields.contact, 
+	fields.no, fields.customerAccount, fields.contact, fields.currency, 
 ];
 
 export const ui: UI = {

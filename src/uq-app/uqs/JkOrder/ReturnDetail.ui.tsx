@@ -23,12 +23,31 @@ const fields = {
 		"isKey": false,
 		"label": "OrderDetail"
 	} as FieldItemId,
+	item: {
+		"name": "item",
+		"type": "id",
+		"isKey": false,
+		"label": "Item"
+	} as FieldItemId,
+	product: {
+		"name": "product",
+		"type": "id",
+		"isKey": false,
+		"label": "Product"
+	} as FieldItemId,
 	quantity: {
 		"name": "quantity",
 		"type": "number",
 		"isKey": false,
 		"widget": "number",
 		"label": "Quantity"
+	} as FieldItemNum,
+	price: {
+		"name": "price",
+		"type": "number",
+		"isKey": false,
+		"widget": "number",
+		"label": "Price"
 	} as FieldItemNum,
 	amount: {
 		"name": "amount",
@@ -37,11 +56,23 @@ const fields = {
 		"widget": "number",
 		"label": "Amount"
 	} as FieldItemNum,
+	lotNumber: {
+		"name": "lotNumber",
+		"type": "string",
+		"isKey": false,
+		"widget": "string",
+		"label": "LotNumber"
+	} as FieldItemString,
+	createDate: {
+		"name": "createDate",
+		"isKey": false,
+		"label": "CreateDate"
+	} as undefined,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.main, fields.orderDetail, fields.quantity, fields.amount, 
+	fields.main, fields.orderDetail, fields.item, fields.product, fields.quantity, fields.price, fields.amount, fields.lotNumber, fields.createDate, 
 ];
 
 export const ui: UI = {

@@ -17,12 +17,6 @@ const fields = {
 		"isKey": false,
 		"label": "Main"
 	} as FieldItemId,
-	orderDetail: {
-		"name": "orderDetail",
-		"type": "id",
-		"isKey": false,
-		"label": "OrderDetail"
-	} as FieldItemId,
 	quantity: {
 		"name": "quantity",
 		"type": "number",
@@ -34,7 +28,7 @@ const fields = {
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.main, fields.orderDetail, fields.quantity, 
+	fields.main, fields.quantity, 
 ];
 
 export const ui: UI = {

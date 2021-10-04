@@ -1,7 +1,7 @@
 import { Res, setRes, TFunc, UI, uqStringify } from "tonva-react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FieldItem, FieldItemInt, FieldItemNum, FieldItemString, FieldItemId } from "tonva-react";
-import { DxOrderDetail } from "./JkDeliver";
+import { OrderMain } from "./JkMe";
 
 /*--fields--*/
 const fields = {
@@ -11,50 +11,47 @@ const fields = {
 		"isKey": false,
 		"label": "Id"
 	} as FieldItemId,
-	deliverShould: {
-		"name": "deliverShould",
+	no: {
+		"name": "no",
+		"type": "string",
+		"isKey": true,
+		"widget": "string",
+		"label": "No"
+	} as FieldItemString,
+	webUser: {
+		"name": "webUser",
+		"type": "id",
+		"isKey": false,
+		"label": "WebUser"
+	} as FieldItemId,
+	customerAccount: {
+		"name": "customerAccount",
+		"type": "id",
+		"isKey": false,
+		"label": "CustomerAccount"
+	} as FieldItemId,
+	currency: {
+		"name": "currency",
+		"type": "id",
+		"isKey": false,
+		"label": "Currency"
+	} as FieldItemId,
+	sumAmount: {
+		"name": "sumAmount",
 		"type": "number",
 		"isKey": false,
 		"widget": "number",
-		"label": "DeliverShould"
-	} as FieldItemNum,
-	deliverReturn: {
-		"name": "deliverReturn",
-		"type": "number",
-		"isKey": false,
-		"widget": "number",
-		"label": "DeliverReturn"
-	} as FieldItemNum,
-	returnDone: {
-		"name": "returnDone",
-		"type": "number",
-		"isKey": false,
-		"widget": "number",
-		"label": "ReturnDone"
-	} as FieldItemNum,
-	pickDone: {
-		"name": "pickDone",
-		"type": "number",
-		"isKey": false,
-		"widget": "number",
-		"label": "PickDone"
-	} as FieldItemNum,
-	deliverDone: {
-		"name": "deliverDone",
-		"type": "number",
-		"isKey": false,
-		"widget": "number",
-		"label": "DeliverDone"
+		"label": "SumAmount"
 	} as FieldItemNum,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.deliverShould, fields.deliverReturn, fields.returnDone, fields.pickDone, fields.deliverDone, 
+	fields.no, fields.webUser, fields.customerAccount, fields.currency, fields.sumAmount, 
 ];
 
 export const ui: UI = {
-	label: "DxOrderDetail",
+	label: "OrderMain",
 	fieldArr,
 	fields,
 };
@@ -72,6 +69,6 @@ export const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {
 	return res[str as string] ?? str;
 }
 
-export function render(item: DxOrderDetail):JSX.Element {
+export function render(item: OrderMain):JSX.Element {
 	return <>{uqStringify(item)}</>;
 };

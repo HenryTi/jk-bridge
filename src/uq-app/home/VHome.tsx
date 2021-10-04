@@ -7,7 +7,7 @@ import { saveOrderParams, sendBusAdapterExParams, sendBusFiReceivableExParams, s
 interface Item {
 	caption: string;
 	json: any;
-	action: () => Promise<void>;
+	action: () => Promise<boolean>;
 }
 
 export class VHome extends VPage<CHome> {
@@ -35,20 +35,35 @@ export class VHome extends VPage<CHome> {
 				action: this.controller.createNewOrder,
 			},
 			{
-				caption: '发送Bus JkOrderBus.dleiver-done',
+				caption: '发送Bus JkOrderBus.deliver-done',
 				json: sendBusJkOrderBusParams,
 				action: this.controller.deliverDone,
 			},
+			{
+				caption: '发送Bus JkOrderBus.order-sale-cost，需要等待order的源单被接收之后，才能发送cost',
+				json: this.controller.pushOrderParams,
+				action: this.controller.pushOrderCost,
+			},
+			{
+				caption: '发送Bus JkOrderBus.order-bound-staff-sales',
+				json: this.controller.pushOrderParams,
+				action: this.controller.pushOrderBoundStaffSales,
+			},
+			{
+				caption: '发送Bus JkOrderBus.receive',
+				json: this.controller.pushOrderParams,
+				action: this.controller.receiveDone,
+			},
 		];
 		return <div className="my-3">
-			{items.map(v => this.renderItem(v))}
+			{items.map((v, index) => this.renderItem(v, index))}
 		</div>;
 	}
 
-	private renderItem(item:Item):JSX.Element {
+	private renderItem(item:Item, index:number):JSX.Element {
 		let {caption, json, action} = item;
 		let right = <FA name="angle-right" />;
-		return <LMR className="cursor-pointer p-3 mb-1 bg-white" 
+		return <LMR key={index} className="cursor-pointer p-3 mb-1 bg-white" 
 			right={right} onClick={() => this.clickItem(item)}>
 			{caption}
 		</LMR>;
@@ -72,13 +87,23 @@ export class VHome extends VPage<CHome> {
 			</div>
 		</Page>);
 		let {action, caption, json} = item;
-		await action();
+		let retAction = await action();
 		this.closePage();
-		this.openPageElement(<Page header="发送完成" back="close">
-			<div className="py-3">
-				<div className="px-3 text-success">完成{caption}</div>
-				<pre className="bg-white my-3 p-3">{JSON.stringify(item.json, null, 4)}</pre>
-			</div>
-		</Page>);
+		if (retAction === false) {
+			this.openPageElement(<Page header="发送失败" back="close">
+				<div className="text-danger p-3">发送失败。 请重新发送！</div>
+				<div className="py-3">
+					<pre className="bg-white my-3 p-3">{JSON.stringify(json, null, 4)}</pre>
+				</div>
+			</Page>);
+		}
+		else {
+			this.openPageElement(<Page header="发送成功" back="close">
+				<div className="py-3">
+					<div className="px-3 text-success">完成{caption}</div>
+					<pre className="bg-white my-3 p-3">{JSON.stringify(json, null, 4)}</pre>
+				</div>
+			</Page>);
+		}
 	}
 }

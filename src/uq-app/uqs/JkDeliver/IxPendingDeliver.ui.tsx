@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Res, setRes, TFunc, UI, uqStringify } from "tonva-react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FieldItem, FieldItemInt, FieldItemNum, FieldItemString, FieldItemId } from "tonva-react";
@@ -23,11 +24,28 @@ const fields = {
 		"isKey": false,
 		"label": "Xi"
 	} as FieldItemId,
+	quantity: {
+		"name": "quantity",
+		"type": "number",
+		"isKey": false,
+		"widget": "number",
+		"label": "Quantity"
+	} as FieldItemNum,
+	showPrice: {
+		"name": "showPrice",
+		"isKey": false,
+		"label": "ShowPrice"
+	} as undefined,
+	json: {
+		"name": "json",
+		"isKey": false,
+		"label": "Json"
+	} as undefined,
 };
 /*==fields==*/
 
 const fieldArr: FieldItem[] = [
-	fields.ixx, fields.xi, 
+	fields.ixx, fields.xi, fields.quantity, fields.showPrice, fields.json, 
 ];
 
 export const ui: UI = {
